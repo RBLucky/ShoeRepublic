@@ -2,6 +2,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link"; // Import Link from Next.js
 import { useCartStore } from "@/store/cart";
 import { X, Minus, Plus, Trash2 } from "lucide-react";
 
@@ -98,12 +99,13 @@ export default function CartSidebar() {
                             </div>
                             <p className="mt-0.5 text-caption text-dark-700">Shipping and taxes calculated at checkout.</p>
                             <div className="mt-6">
-                                <a
-                                    href="#" // This will later link to the checkout page
+                                <Link
+                                    href="/checkout"
+                                    onClick={closeCart}
                                     className="flex items-center justify-center rounded-md border border-transparent bg-dark-900 px-6 py-3 text-body-medium text-light-100 shadow-sm hover:opacity-90"
                                 >
                                     Checkout
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
