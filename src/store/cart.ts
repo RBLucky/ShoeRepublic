@@ -1,5 +1,5 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 interface CartItem {
   id: string;
@@ -12,7 +12,10 @@ interface CartItem {
 interface CartState {
   items: CartItem[];
   total: number;
-  addItem: (item: Omit<CartItem, 'quantity'>) => void;
+  isOpen: boolean; // Add state for sidebar visibility
+  openCart: () => void; // Add action to open the cart
+  closeCart: () => void; // Add action to close the cart
+  addItem: (item: Omit<CartItem, "quantity">) => void;
   removeItem: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
@@ -24,10 +27,13 @@ export const useCartStore = create<CartState>()(
     (set, get) => ({
       items: [],
       total: 0,
+      isOpen: false, // Default to closed
+      openCart: () => set({ isOpen: true }),
+      closeCart: () => set({ isOpen: false }),
       addItem: (item) => {
         const items = get().items;
         const existingItem = items.find((i) => i.id === item.id);
-        
+
         if (existingItem) {
           set({
             items: items.map((i) =>
@@ -39,15 +45,21 @@ export const useCartStore = create<CartState>()(
             items: [...items, { ...item, quantity: 1 }],
           });
         }
-        
+
         // Update total
         const newItems = get().items;
-        const total = newItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const total = newItems.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0
+        );
         set({ total });
       },
       removeItem: (id) => {
         const items = get().items.filter((item) => item.id !== id);
-        const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const total = items.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0
+        );
         set({ items, total });
       },
       updateQuantity: (id, quantity) => {
@@ -55,18 +67,24 @@ export const useCartStore = create<CartState>()(
           get().removeItem(id);
           return;
         }
-        
+
         const items = get().items.map((item) =>
           item.id === id ? { ...item, quantity } : item
         );
-        const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const total = items.reduce(
+          (sum, item) => sum + item.price * item.quantity,
+          0
+        );
         set({ items, total });
       },
       clearCart: () => set({ items: [], total: 0 }),
-      getItemCount: () => get().items.reduce((sum, item) => sum + item.quantity, 0),
+      getItemCount: () =>
+        get().items.reduce((sum, item) => sum + item.quantity, 0),
     }),
     {
-      name: 'cart-storage',
+      name: "cart-storage",
+      // Only persist items and total, not the open/closed state
+      partialize: (state) => ({ items: state.items, total: state.total }),
     }
   )
 );

@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useCartStore } from "@/store/cart";
 
 const NAV_LINKS = [
   { label: "Men", href: "/products?gender=men" },
@@ -14,6 +15,20 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const { getItemCount, openCart } = useCartStore(); // Get the openCart action
+  const [itemCount, setItemCount] = useState(0);
+
+  useEffect(() => {
+    setItemCount(getItemCount());
+  }, [getItemCount]);
+
+  useEffect(() => {
+    const unsubscribe = useCartStore.subscribe(() => {
+      setItemCount(getItemCount());
+    });
+    return () => unsubscribe();
+  }, [getItemCount]);
+
 
   return (
     <header className="sticky top-0 z-50 bg-light-100">
@@ -21,9 +36,7 @@ export default function Navbar() {
         className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8"
         aria-label="Primary"
       >
-        {/* The home link now correctly references Shoe Republic */}
         <Link href="/" aria-label="Shoe Republic Home" className="flex items-center">
-          {/* The logo's alt text is updated. The src will need to point to your new logo. */}
           <Image src="/logo.svg" alt="Shoe Republic" width={28} height={28} priority className="invert" />
         </Link>
 
@@ -44,8 +57,12 @@ export default function Navbar() {
           <button className="text-body text-dark-900 transition-colors hover:text-dark-700">
             Search
           </button>
-          <button className="text-body text-dark-900 transition-colors hover:text-dark-700">
-            My Cart (2)
+          {/* Attach onClick to open the cart sidebar */}
+          <button
+            onClick={openCart}
+            className="text-body text-dark-900 transition-colors hover:text-dark-700"
+          >
+            My Cart ({itemCount})
           </button>
         </div>
 
@@ -81,7 +98,10 @@ export default function Navbar() {
           ))}
           <li className="flex items-center justify-between pt-2">
             <button className="text-body">Search</button>
-            <button className="text-body">My Cart (2)</button>
+            {/* Attach onClick to the mobile cart button as well */}
+            <button onClick={openCart} className="text-body">
+              My Cart ({itemCount})
+            </button>
           </li>
         </ul>
       </div>
