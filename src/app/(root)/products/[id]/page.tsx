@@ -197,8 +197,9 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             <p>{product.description}</p>
           </CollapsibleSection>
 
+          {/* Text updated to Shoe Republic Members */}
           <CollapsibleSection title="Shipping & Returns">
-            <p>Free standard shipping and free 30-day returns for Nike Members.</p>
+            <p>Free standard shipping and free 30-day returns for Shoe Republic Members.</p>
           </CollapsibleSection>
 
           <Suspense

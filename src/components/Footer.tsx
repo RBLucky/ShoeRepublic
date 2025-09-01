@@ -26,7 +26,8 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-12">
           <div className="flex items-start md:col-span-3">
-            <Image src="/logo.svg" alt="Nike" width={48} height={48} />
+            {/* The logo image source will need to be updated to a Shoe Republic logo */}
+            <Image src="/logo.svg" alt="Shoe Republic" width={48} height={48} />
           </div>
 
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 md:col-span-7">
@@ -72,11 +73,12 @@ export default function Footer() {
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-4 text-light-400 sm:flex-row sm:px-6 lg:px-8">
           <div className="flex items-center gap-3 text-caption">
             <Image src="/globe.svg" alt="" width={16} height={16} />
-            <span>Croatia</span>
-            <span>© 2025 Nike, Inc. All Rights Reserved</span>
+            <span>South Africa</span>
+            {/* The copyright notice has been updated */}
+            <span>© 2025 Shoe Republic, Inc. All Rights Reserved</span>
           </div>
           <ul className="flex items-center gap-6 text-caption">
-            {["Guides", "Terms of Sale", "Terms of Use", "Nike Privacy Policy"].map((t) => (
+            {["Guides", "Terms of Sale", "Terms of Use", "Privacy Policy"].map((t) => (
               <li key={t}>
                 <Link href="#">{t}</Link>
               </li>

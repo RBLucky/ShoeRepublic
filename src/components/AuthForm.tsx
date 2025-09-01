@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import SocialProviders from "./SocialProviders";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 type Props = {
   mode: "sign-in" | "sign-up";
@@ -22,7 +22,7 @@ export default function AuthForm({ mode, onSubmit }: Props) {
     try {
       const result = await onSubmit(formData);
 
-      if(result?.ok) router.push("/");
+      if (result?.ok) router.push("/");
     } catch (e) {
       console.log("error", e);
     }
@@ -38,7 +38,7 @@ export default function AuthForm({ mode, onSubmit }: Props) {
           </Link>
         </p>
         <h1 className="mt-3 text-heading-3 text-dark-900">
-          {mode === "sign-in" ? "Welcome Back!" : "Join Nike Today!"}
+          {mode === "sign-in" ? "Welcome Back!" : "Join Shoe Republic Today!"}
         </h1>
         <p className="mt-1 text-body text-dark-700">
           {mode === "sign-in"

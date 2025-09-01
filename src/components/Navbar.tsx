@@ -21,8 +21,10 @@ export default function Navbar() {
         className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8"
         aria-label="Primary"
       >
-        <Link href="/" aria-label="Nike Home" className="flex items-center">
-          <Image src="/logo.svg" alt="Nike" width={28} height={28} priority className="invert" />
+        {/* The home link now correctly references Shoe Republic */}
+        <Link href="/" aria-label="Shoe Republic Home" className="flex items-center">
+          {/* The logo's alt text is updated. The src will need to point to your new logo. */}
+          <Image src="/logo.svg" alt="Shoe Republic" width={28} height={28} priority className="invert" />
         </Link>
 
         <ul className="hidden items-center gap-8 md:flex">

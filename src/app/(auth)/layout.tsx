@@ -6,14 +6,17 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       <section className="hidden lg:flex flex-col justify-between bg-dark-900 text-light-100 p-10">
         <div className="flex items-center">
           <div className="h-8 w-8 rounded-md bg-orange inline-flex items-center justify-center">
-            <Image src="/logo.svg" alt="Nike" width={20} height={20} />
+            {/* The logo image source will need to be updated */}
+            <Image src="/logo.svg" alt="Shoe Republic" width={20} height={20} />
           </div>
         </div>
 
         <div className="space-y-4">
-          <h2 className="text-heading-2">Just Do It</h2>
+          {/* Slogan updated for Shoe Republic */}
+          <h2 className="text-heading-2">Step Up Your Style</h2>
           <p className="max-w-md text-lead text-light-300">
-            Join millions of athletes and fitness enthusiasts who trust Nike for their performance needs.
+            {/* Promotional text updated for Shoe Republic */}
+            Join millions of sneaker enthusiasts and find your perfect pair with Shoe Republic.
           </p>
           <div className="flex gap-2" aria-hidden="true">
             <span className="h-2 w-2 rounded-full bg-light-100/90" />
@@ -22,7 +25,8 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           </div>
         </div>
 
-        <p className="text-footnote text-light-400">© 2025 Nike. All rights reserved.</p>
+        {/* Copyright notice updated */}
+        <p className="text-footnote text-light-400">© 2025 Shoe Republic. All rights reserved.</p>
       </section>
 
       <section className="flex items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
