@@ -1,3 +1,4 @@
+// src/app/(root)/page.tsx
 import React from "react";
 import { Card } from "@/components";
 import { getCurrentUser } from "@/lib/auth/actions";
@@ -8,14 +9,15 @@ const Home = async () => {
   const user = await getCurrentUser();
   console.log('USER:', user);
 
-  // Fetch the latest products dynamically instead of using a static list.
   const latestProducts = await getAllProducts(
     parseFilterParams({ sort: "newest", limit: "6" })
   );
 
   return (
+    // The py-12 class has been removed from here as the layout now controls top padding
     <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <section aria-labelledby="latest" className="pb-12">
+      {/* Added py-12 here to ensure consistent spacing within the page */}
+      <section aria-labelledby="latest" className="py-12">
         <h2 id="latest" className="mb-6 text-heading-3 text-dark-900">
           Latest Arrivals
         </h2>
@@ -32,7 +34,7 @@ const Home = async () => {
                 key={p.id}
                 title={p.name}
                 subtitle={p.subtitle ?? undefined}
-                imageSrc={p.imageUrl ?? "/shoes/shoe-1.jpg"} // Fallback image
+                imageSrc={p.imageUrl ?? "/shoes/shoe-1.jpg"}
                 price={price}
                 href={`/products/${p.id}`}
               />

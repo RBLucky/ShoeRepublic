@@ -3,7 +3,7 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "@/lib/db";
 import * as schema from "@/lib/db/schema/index";
 import { v4 as uuidv4 } from "uuid";
-import {nextCookies} from "better-auth/next-js";
+import { nextCookies } from "better-auth/next-js";
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
@@ -19,12 +19,24 @@ export const auth = betterAuth({
     enabled: true,
     requireEmailVerification: false,
   },
-  socialProviders: {},
+  // Social providers are commented out to resolve the error
+  socialProviders: {
+    /*
+    google: GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+    apple: AppleProvider({
+      clientId: process.env.APPLE_CLIENT_ID!,
+      clientSecret: process.env.APPLE_CLIENT_SECRET!,
+    }),
+    */
+  },
   sessions: {
     cookieCache: {
       enabled: true,
-      maxAge: 60 * 60 * 24 * 7
-    }
+      maxAge: 60 * 60 * 24 * 7,
+    },
   },
   cookies: {
     sessionToken: {
@@ -32,16 +44,16 @@ export const auth = betterAuth({
       options: {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: 'strict',
-        path: '/',
+        sameSite: "strict",
+        path: "/",
         maxAge: 60 * 60 * 24 * 7,
-      }
-    }
+      },
+    },
   },
   advanced: {
     database: {
-      generateId: () => uuidv4()
-    }
+      generateId: () => uuidv4(),
+    },
   },
-  plugins: [nextCookies()]
+  plugins: [nextCookies()],
 });
