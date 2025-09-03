@@ -3,7 +3,8 @@
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import Link from 'next/link'
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
+import { forwardRef } from 'react';
 
 const faqItems = [
     {
@@ -28,13 +29,44 @@ const faqItems = [
     },
 ];
 
-export default function FaqAccordion() {
+const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.1,
+            delayChildren: 0.2,
+        },
+    },
+};
+
+const itemVariants: Variants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+        y: 0,
+        opacity: 1,
+        transition: {
+            duration: 0.5,
+            ease: "easeInOut",
+        },
+    },
+};
+
+interface FaqAccordionProps {
+    animate: "visible" | "hidden";
+}
+
+// Wrap the component with forwardRef and name the function for better debugging
+const FaqAccordion = forwardRef<HTMLDivElement, FaqAccordionProps>(function FaqAccordion({ animate }, ref) {
     return (
-        <section>
+        <motion.section
+            variants={containerVariants}
+            initial="hidden"
+            animate={animate}
+        >
             <div className="mx-auto max-w-5xl">
                 <div className="grid gap-8 md:grid-cols-5 md:gap-12">
-                    <div className="md:col-span-2">
-                        {/* Text and styling adapted for the dark theme */}
+                    <motion.div className="md:col-span-2" variants={itemVariants}>
                         <h2 className="text-light-100 text-4xl font-semibold">FAQs</h2>
                         <p className="text-light-100/70 mt-4 text-balance text-lg">
                             Everything you need to know about Shoe Republic
@@ -42,16 +74,16 @@ export default function FaqAccordion() {
                         <p className="text-light-100/70 mt-6 hidden md:block">
                             Can’t find what you’re looking for? Reach out to our{' '}
                             <Link
-                                href="/contact" // Link now points to the correct contact page
+                                href="/contact"
                                 className="text-light-100 font-medium hover:underline"
                             >
                                 customer support team
                             </Link>{' '}
                             for assistance.
                         </p>
-                    </div>
+                    </motion.div>
 
-                    <div className="md:col-span-3">
+                    <motion.div className="md:col-span-3" variants={itemVariants} ref={ref}>
                         <Accordion type="single" collapsible>
                             {faqItems.map((item) => (
                                 <AccordionItem key={item.id} value={item.id}>
@@ -62,21 +94,23 @@ export default function FaqAccordion() {
                                 </AccordionItem>
                             ))}
                         </Accordion>
-                    </div>
+                    </motion.div>
 
-                    <p className="text-light-100/70 mt-6 md:hidden">
+                    <motion.p className="text-light-100/70 mt-6 md:hidden" variants={itemVariants}>
                         Can't find what you're looking for? Contact our{' '}
                         <Link
                             href="/contact"
                             className="text-light-100 font-medium hover:underline">
                             customer support team
                         </Link>
-                    </p>
+                    </motion.p>
                 </div>
             </div>
-        </section>
+        </motion.section>
     )
-}
+});
+
+export default FaqAccordion;
 
 // This is the animated text component
 export const BlurredStagger = ({ text }: { text: string }) => {

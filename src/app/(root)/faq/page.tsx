@@ -1,11 +1,12 @@
 // src/app/(root)/faq/page.tsx
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { motion, useInView, type Variants } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, useInView, useScroll, useMotionValueEvent, type Variants } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import FaqAccordion from "@/components/ui/faq-accordion";
 
 const categories = ["All", "Shipping", "Returns", "Orders", "Products"];
 
@@ -36,15 +37,31 @@ export default function FaqPage() {
     const heroTitle = "How Can We Help?";
     const categoryTitle = "Browse by Category";
 
-    // 1. Create a ref to track the hero section
     const heroRef = useRef(null);
     const isHeroInView = useInView(heroRef, { margin: "-50% 0px -50% 0px" });
 
+    const accordionRef = useRef<HTMLDivElement>(null);
+    const [hasAccordionScrolledPast, setHasAccordionScrolledPast] = useState(false);
+    const { scrollY } = useScroll();
+
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        if (hasAccordionScrolledPast) return;
+
+        const triggerElement = accordionRef.current;
+        if (triggerElement) {
+            const triggerBottom = triggerElement.offsetTop + triggerElement.offsetHeight;
+            if (latest > triggerBottom) {
+                setHasAccordionScrolledPast(true);
+            }
+        }
+    });
+
+
     return (
         <main className="bg-dark-900 text-light-100">
-            {/* Step 1: The Hero Section */}
+            {/* Hero Section */}
             <section
-                ref={heroRef} // 2. Attach the ref to the hero
+                ref={heroRef}
                 className="flex min-h-screen items-center justify-center overflow-hidden"
             >
                 <motion.div
@@ -67,13 +84,12 @@ export default function FaqPage() {
                 </motion.div>
             </section>
 
-            {/* This div will contain the rest of the page content */}
+            {/* Main Content */}
             <div className="relative z-10 mx-auto max-w-7xl px-4 pb-24 sm:px-6 lg:px-8">
-                {/* Step 2: The Category Filters Section */}
-                {/* 3. Animate this section based on whether the hero is in view */}
+                {/* Category Filters Section */}
                 <motion.div
                     initial="hidden"
-                    animate={!isHeroInView ? "visible" : "hidden"} // Animate only when hero is NOT in view
+                    animate={!isHeroInView ? "visible" : "hidden"}
                     variants={containerVariants}
                     className="mb-20"
                 >
@@ -111,27 +127,34 @@ export default function FaqPage() {
                     </div>
                 </motion.div>
 
+                {/* FAQ Accordion Section */}
                 <div className="min-h-[50vh]">
-                    {/* We will build the accordion here next */}
+                    <FaqAccordion ref={accordionRef} animate={!isHeroInView ? "visible" : "hidden"} />
                 </div>
 
+                <div className="h-[20vh]" />
+
+                {/* "Still have questions?" Section */}
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 1 }}
+                    initial="hidden"
+                    whileInView={hasAccordionScrolledPast ? "visible" : "hidden"}
+                    viewport={{ amount: 0.5, once: true }}
+                    variants={containerVariants}
                     className="mt-24 text-center"
                 >
-                    <h2 className="text-heading-2 font-bold text-light-100">Still have questions?</h2>
-                    <p className="mx-auto mt-4 max-w-2xl text-lead text-light-100/70">
+                    <motion.h2 variants={itemVariants} className="text-heading-2 font-bold text-light-100">Still have questions?</motion.h2>
+                    <motion.p variants={itemVariants} className="mx-auto mt-4 max-w-2xl text-lead text-light-100/70">
                         Our team is here to help. Get in touch with us and we'll get back to you as soon as possible.
-                    </p>
-                    <div className="mt-8">
+                    </motion.p>
+                    <motion.div variants={itemVariants} className="mt-8">
                         <Link href="/contact" className="inline-flex items-center gap-2 rounded-full bg-light-100 px-8 py-4 text-body-medium font-semibold text-dark-900 transition-transform hover:scale-105">
                             Contact Us <ArrowRight size={20} />
                         </Link>
-                    </div>
+                    </motion.div>
                 </motion.div>
+
+                {/* Add a spacer div here to create empty space before the footer */}
+                <div className="h-[50vh]" />
             </div>
         </main>
     );
