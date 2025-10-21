@@ -135,7 +135,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                             )}
                             {debouncedQuery.length > 1 && !isLoading && results.length === 0 && (
                                 <div className="p-6 text-center text-body text-dark-700">
-                                    <p>No results found for "{debouncedQuery}"</p>
+                                    <p>No results found for &quot;{debouncedQuery}&quot;</p> {/* Changed " to &quot; */}
                                 </div>
                             )}
                         </div>

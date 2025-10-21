@@ -7,7 +7,7 @@ export default function ContactPage() {
             <header className="mb-12 text-center">
                 <h1 className="text-heading-2 text-dark-900">Get In Touch</h1>
                 <p className="mx-auto mt-2 max-w-2xl text-lead text-dark-700">
-                    Have a question or feedback? We'd love to hear from you.
+                    Have a question or feedback? We&apos;d love to hear from you. {/* Changed We'd to We&apos;d */}
                 </p>
             </header>
 

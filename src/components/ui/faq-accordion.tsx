@@ -72,7 +72,7 @@ const FaqAccordion = forwardRef<HTMLDivElement, FaqAccordionProps>(function FaqA
                             Everything you need to know about Shoe Republic
                         </p>
                         <p className="text-light-100/70 mt-6 hidden md:block">
-                            Can’t find what you’re looking for? Reach out to our{' '}
+                            Can&apos;t find what you&apos;re looking for? Reach out to our{' '} {/* Changed Can't and you're */}
                             <Link
                                 href="/contact"
                                 className="text-light-100 font-medium hover:underline"
@@ -97,7 +97,7 @@ const FaqAccordion = forwardRef<HTMLDivElement, FaqAccordionProps>(function FaqA
                     </motion.div>
 
                     <motion.p className="text-light-100/70 mt-6 md:hidden" variants={itemVariants}>
-                        Can't find what you're looking for? Contact our{' '}
+                        Can&apos;t find what you&apos;re looking for? Contact our{' '} {/* Changed Can't and you're */}
                         <Link
                             href="/contact"
                             className="text-light-100 font-medium hover:underline">
@@ -138,6 +138,7 @@ export const BlurredStagger = ({ text }: { text: string }) => {
             animate="show"
             className="text-base leading-relaxed break-words whitespace-normal"
         >
+            {/* Split and map the text, ensuring apostrophes are handled */}
             {headingText.split("").map((char, index) => (
                 <motion.span
                     key={index}
@@ -145,7 +146,8 @@ export const BlurredStagger = ({ text }: { text: string }) => {
                     transition={{ duration: 0.3 }}
                     className="inline-block"
                 >
-                    {char === " " ? "\u00A0" : char}
+                    {/* Render space as non-breaking space, handle apostrophe */}
+                    {char === "'" ? "\u0027" : char === " " ? "\u00A0" : char}
                 </motion.span>
             ))}
         </motion.p>

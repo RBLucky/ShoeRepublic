@@ -21,7 +21,7 @@ export default function ShippingPage() {
                         Shipping & Returns
                     </h1>
                     <p className="mx-auto mt-6 max-w-xl text-lead text-white/90">
-                        We're committed to getting your order to you quickly and smoothly, with a straightforward returns process for your peace of mind.
+                        We&apos;re committed to getting your order to you quickly and smoothly, with a straightforward returns process for your peace of mind. {/* Changed We're to We&apos;re */}
                     </p>
                 </div>
             </div>
@@ -82,7 +82,7 @@ export default function ShippingPage() {
                         <h2 className="text-heading-2 text-dark-900 mb-6 border-b border-light-300 pb-4">Returns & Exchange Policy</h2>
 
                         <p className="text-body text-dark-700 mb-8">
-                            We want you to be completely satisfied with your purchase. If you're not happy with your order for any reason, we offer a <strong>30-day return and exchange policy</strong> from the day you receive your item.
+                            We want you to be completely satisfied with your purchase. If you&apos;re not happy with your order for any reason, we offer a <strong>30-day return and exchange policy</strong> from the day you receive your item. {/* Changed you're to you&apos;re */}
                         </p>
 
                         <h3 className="text-heading-3 text-dark-900 mt-8 mb-4">Eligibility for a Return</h3>
@@ -90,7 +90,7 @@ export default function ShippingPage() {
                             <li>Items must be unworn, unwashed, and in their original condition.</li>
                             <li>All original tags and packaging, including the shoebox, must be intact and returned with the item. The shoebox must be protected and not used as the shipping box.</li>
                             <li>You must provide proof of purchase (your order number or confirmation email).</li>
-                            <li>Items marked as "Final Sale" are not eligible for returns or exchanges.</li>
+                            <li>Items marked as &quot;Final Sale&quot; are not eligible for returns or exchanges.</li> {/* Changed " to &quot; */}
                         </ul>
 
                         <h3 className="text-heading-3 text-dark-900 mt-8 mb-4">How to Initiate a Return</h3>

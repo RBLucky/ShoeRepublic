@@ -144,7 +144,7 @@ export default function FaqPage() {
                 >
                     <motion.h2 variants={itemVariants} className="text-heading-2 font-bold text-light-100">Still have questions?</motion.h2>
                     <motion.p variants={itemVariants} className="mx-auto mt-4 max-w-2xl text-lead text-light-100/70">
-                        Our team is here to help. Get in touch with us and we'll get back to you as soon as possible.
+                        Our team is here to help. Get in touch with us and we&apos;ll get back to you as soon as possible. {/* Changed we'll to we&apos;ll */}
                     </motion.p>
                     <motion.div variants={itemVariants} className="mt-8">
                         <Link href="/contact" className="inline-flex items-center gap-2 rounded-full bg-light-100 px-8 py-4 text-body-medium font-semibold text-dark-900 transition-transform hover:scale-105">
