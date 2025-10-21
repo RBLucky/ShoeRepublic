@@ -35,7 +35,7 @@ export default function Card({
   className = "",
 }: CardProps) {
   const displayPrice =
-    price === undefined ? undefined : typeof price === "number" ? `$${price.toFixed(2)}` : price;
+    price === undefined ? undefined : typeof price === 'number' ? `R${price.toFixed(2)}` : price;
   const content = (
     // Added h-full to make the article fill its parent container (the Link)
     <article

@@ -264,20 +264,31 @@ async function seed() {
 
       for (const color of colorChoices) {
         for (const size of sizeChoices) {
-          const priceNum = Number((randInt(80, 200) + 0.99).toFixed(2));
+          // --- Start of modified price logic ---
+          let priceNum = Number((randInt(1200, 3500) + 0.99).toFixed(2)); // Use Rand range
+
+          // Check if the price is R200 or less and multiply by 10
+          if (priceNum <= 200) {
+            priceNum *= 10;
+            log(`Adjusted low price for SKU prefix SHOE-REP-${insertedProduct.id.slice(0, 8)}-${color.slug.toUpperCase()}-${size.slug.toUpperCase()} to ${priceNum.toFixed(2)}`);
+          }
+
           const discountedNum =
             Math.random() < 0.3
-              ? Number((priceNum - randInt(5, 25)).toFixed(2))
+              ? Number((priceNum - randInt(100, 500)).toFixed(2)) // Use Rand discount range
               : null;
+          // --- End of modified price logic ---
+
           // Updated SKU format
           const sku = `SHOE-REP-${insertedProduct.id.slice(
             0,
             8
           )}-${color.slug.toUpperCase()}-${size.slug.toUpperCase()}`;
+
           const variant = insertVariantSchema.parse({
             productId: insertedProduct.id,
             sku,
-            price: priceNum.toFixed(2),
+            price: priceNum.toFixed(2), // Use the potentially adjusted price
             salePrice:
               discountedNum !== null ? discountedNum.toFixed(2) : undefined,
             colorId: color.id,

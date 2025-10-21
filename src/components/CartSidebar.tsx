@@ -65,7 +65,7 @@ export default function CartSidebar() {
                                                     <div>
                                                         <div className="flex justify-between text-body-medium text-dark-900">
                                                             <h3>{item.name}</h3>
-                                                            <p className="ml-4">${(item.price * item.quantity).toFixed(2)}</p>
+                                                            <p className="ml-4">R{(item.price * item.quantity).toFixed(2)}</p>
                                                         </div>
                                                     </div>
                                                     <div className="flex flex-1 items-end justify-between text-sm">
@@ -95,7 +95,7 @@ export default function CartSidebar() {
                         <div className="border-t border-light-300 px-4 py-6 sm:px-6">
                             <div className="flex justify-between text-body-medium text-dark-900">
                                 <p>Subtotal</p>
-                                <p>${total.toFixed(2)}</p>
+                                <p>R{total.toFixed(2)}</p>
                             </div>
                             <p className="mt-0.5 text-caption text-dark-700">Shipping and taxes calculated at checkout.</p>
                             <div className="mt-6">

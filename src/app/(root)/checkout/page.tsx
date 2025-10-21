@@ -40,22 +40,22 @@ function OrderSummary() {
                             <p className="text-body-medium text-dark-900">{item.name}</p>
                             <p className="text-caption text-dark-700">Qty: {item.quantity}</p>
                         </div>
-                        <p className="text-body text-dark-900">${(item.price * item.quantity).toFixed(2)}</p>
+                        <p className="text-body text-dark-900">R{(item.price * item.quantity).toFixed(2)}</p>
                     </div>
                 ))}
             </div>
             <div className="mt-6 space-y-2 border-t border-light-300 pt-4">
                 <div className="flex justify-between text-body text-dark-700">
                     <span>Subtotal</span>
-                    <span>${total.toFixed(2)}</span>
+                    <span>R{total.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-body text-dark-700">
                     <span>Shipping</span>
-                    <span>${shippingCost.toFixed(2)}</span>
+                    <span>R{shippingCost.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-body-medium text-dark-900">
                     <span>Total</span>
-                    <span>${totalCost.toFixed(2)}</span>
+                    <span>R{totalCost.toFixed(2)}</span>
                 </div>
             </div>
         </div>

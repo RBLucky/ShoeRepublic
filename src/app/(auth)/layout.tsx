@@ -7,7 +7,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         <div className="flex items-center">
           <div className="h-8 w-8 rounded-md bg-orange inline-flex items-center justify-center">
             {/* The logo image source will need to be updated */}
-            <Image src="/logo.svg" alt="Shoe Republic" width={20} height={20} />
+            <Image src="/logo.svg" alt="Shoe Republic" width={60} height={60} />
           </div>
         </div>
 

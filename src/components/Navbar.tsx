@@ -66,11 +66,11 @@ export default function Navbar() {
             <Image
               src="/logo.svg"
               alt="Shoe Republic"
-              width={28}
-              height={28}
+              width={130}
+              height={130}
               priority
               // Invert the logo color on dark backgrounds (transparent navbar)
-              className={cn(isTransparent ? "" : "invert")}
+              //className={cn(isTransparent ? "" : "invert")}
             />
           </Link>
 

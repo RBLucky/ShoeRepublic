@@ -26,7 +26,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {/* Left Column: Brand and Newsletter */}
           <div className="space-y-8">
-            <Image src="/logo.svg" alt="Shoe Republic" width={48} height={48} />
+            <Image src="/logo.svg" alt="Shoe Republic" width={150} height={150} />
             <p className="max-w-xs text-body text-light-400">
               Your destination for premium, stylish, and comfortable footwear.
             </p>
